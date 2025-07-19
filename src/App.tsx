@@ -13,37 +13,42 @@ function App() {
   }
 
   return (
-    <main className="container">
-      <h1>Welcome to Tauri + React</h1>
+    <main className="min-h-screen flex flex-col items-center justify-center p-4 bg-gray-100 text-gray-800">
+      <div className="bg-white p-8 rounded-lg shadow-xl text-center max-w-md w-full">
+        <h1 className="text-4xl font-extrabold text-indigo-600 mb-3">
+          Welcome to Tauri + React
+        </h1>
+        <p className="text-lg text-gray-600 mb-8">
+          Click on the Tauri, Vite, and React logos to learn more.
+        </p>
 
-      <div className="row">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <form
+          className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-6"
+          onSubmit={(e) => {
+            e.preventDefault();
+            greet();
+          }}
+        >
+          <input
+            id="greet-input"
+            className="flex-grow px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-lg"
+            onChange={(e) => setName(e.currentTarget.value)}
+            placeholder="Enter a name..."
+          />
+          <button
+            type="submit"
+            className="px-6 py-2 bg-indigo-600 text-white font-semibold rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-300 ease-in-out text-lg"
+          >
+            Greet
+          </button>
+        </form>
+
+        {greetMsg && (
+          <p className="mt-4 text-xl font-medium text-green-600 bg-green-50 p-3 rounded-md">
+            {greetMsg}
+          </p>
+        )}
       </div>
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
-
-      <form
-        className="row"
-        onSubmit={(e) => {
-          e.preventDefault();
-          greet();
-        }}
-      >
-        <input
-          id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
-        />
-        <button type="submit">Greet</button>
-      </form>
-      <p>{greetMsg}</p>
     </main>
   );
 }
